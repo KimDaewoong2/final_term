@@ -12,7 +12,10 @@ enum Color {
     RESET = 0,
     WHITE,
     YELLOW,
-    PURPLE
+    PURPLE,
+    BLACK,
+    BLUE,
+    GREEN
 };
 
 // 캐릭터 정의
