@@ -70,13 +70,13 @@ void print_board() {
         for (int j = 0; j < WIDTH; j++) {
             switch (board[i][j]) {
             case ROBOT:
-                set_color(BLACK);  // 로봇(유저)
+                set_color(WHITE);  // 로봇(유저)
                 break;
             case TRASH:
                 set_color(YELLOW);  // 쓰레기
                 break;
             case OBSTACLE:
-                set_color(RED);  // 장애물
+                set_color(VIOLET);  // 장애물
                 break;
             default:
                 set_color(RESET);  // 빈 공간은 기본 색상
