@@ -29,7 +29,7 @@ int robot_x =  HEIGHT/ 2;
 int robot_y =  WIDTH - 1;
 
 // 점수
-int score = 0;
+char score = '';
 
 // 색상 출력 함수
 void set_color(enum Color color) {
