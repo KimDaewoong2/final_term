@@ -28,8 +28,8 @@ enum Color {
 char board[HEIGHT][WIDTH];
 
 // 로봇 위치
-int robot_x =  HEIGHT/ 2;
-int robot_y =  WIDTH - 1;
+int robot_x =  WIDTH / 2;
+int robot_y =  HEIGHT - 1;
 
 // 점수
 char score = '';
