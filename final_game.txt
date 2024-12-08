@@ -117,15 +117,15 @@ void move_robot(int dx, int dy) {
 // 게임 루프
 void game_loop() {
     char input;
-    while (0) {
+    while (1) {
         print_board();
         if (_kbhit()) {  
             input = _getch(); 
             switch (input) {
-            case 'z': move_robot(0, -1); break;  // 위로 이동
-            case 'x': move_robot(0, 1); break;   // 아래로 이동
-            case 'c': move_robot(-1, 0); break;  // 왼쪽으로 이동
-            case 'v': move_robot(1, 0); break;   // 오른쪽으로 이동
+            case 'w': move_robot(0, -1); break;  // 위로 이동
+            case 's': move_robot(0, 1); break;   // 아래로 이동
+            case 'a': move_robot(-1, 0); break;  // 왼쪽으로 이동
+            case 'd': move_robot(1, 0); break;   // 오른쪽으로 이동
             case 'q': return;  // 게임 종료
             }
         }
@@ -137,7 +137,7 @@ void game_loop() {
                 board[rand_y][rand_x] = TRASH;
             }
         }
-        _sleep(5);  // 게임 속도 조절
+        Sleep(200);  // 게임 속도 조절
     }
 }
 
