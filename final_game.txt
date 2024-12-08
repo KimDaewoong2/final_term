@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h> 
+#include <conio.h>
+#include <time.h>
 
 // 게임 보드 크기
 #define WIDTH 30
