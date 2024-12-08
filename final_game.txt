@@ -100,7 +100,7 @@ void move_robot(int dx, int dy) {
 
     // 충돌 처리
     if (board[new_y][new_x] == OBSTACLE){
-        printf("!!!!!!!! .\n");
+        printf("게임 오버 .\n");
         exit(0);
     }
     else if (board[new_y][new_x] == TRASH) {
