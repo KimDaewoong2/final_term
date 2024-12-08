@@ -3,8 +3,8 @@
 #include <conio.h> 
 
 // 게임 보드 크기
-#define WIDTH 5
-#define HEIGHT 5
+#define WIDTH 30
+#define HEIGHT 30
 
 // 색상 정의 
 enum Color {
