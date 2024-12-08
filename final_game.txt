@@ -17,9 +17,9 @@ enum Color {
 
 // 캐릭터 정의
 #define EMPTY ' '     // 빈 공간
-#define ROBOT '1'     // 로봇
-#define TRASH '2'     // 쓰레기
-#define OBSTACLE '3'  // 장애물
+#define ROBOT 'R'     // 로봇
+#define TRASH '@'     // 쓰레기
+#define OBSTACLE '#'  // 장애물
 
 // 게임 보드
 char board[HEIGHT][WIDTH];
