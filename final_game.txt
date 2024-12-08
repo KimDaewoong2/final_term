@@ -1,0 +1,148 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h> 
+
+// 게임 보드 크기
+#define WIDTH 5
+#define HEIGHT 5
+
+// 색상 정의 
+enum Color {
+    RESET = 0,
+    WHITE,
+    YELLOW,
+    PURPLE
+};
+
+// 캐릭터 정의
+#define EMPTY ' '     // 빈 공간
+#define ROBOT '1'     // 로봇
+#define TRASH '2'     // 쓰레기
+#define OBSTACLE '3'  // 장애물
+
+// 게임 보드
+char board[HEIGHT][WIDTH];
+
+// 로봇 위치
+int robot_x =  HEIGHT/ 2;
+int robot_y =  WIDTH - 1;
+
+// 점수
+int score = '  ';
+
+// 색상 출력 함수
+void set_color(enum Color color) {
+    switch (color) {
+    case WHITE:  printf("\033[37m"); break;  
+    case YELLOW: printf("\033[33m"); break;  
+    case PURPLE: printf("\033[35m"); break;  
+    }
+}
+
+// 게임 초기화
+void init_game() {
+    srand(time(NULL));
+
+    // 보드 초기화
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            // 랜덤으로 쓰레기와 장애물 배치
+            if (rand() % 10 < 2) {
+                board[i][j] = TRASH;  // 20% 확률로 쓰레기
+            }
+            else if (rand() % 10 < 1) {
+                board[i][j] = OBSTACLE;  // 10% 확률로 장애물
+            }
+            else {
+                board[i][j] = EMPTY;  // 나머지는 빈 공간
+            }
+        }
+    }
+    // 로봇 초기 위치 설정
+    board[robot_y][robot_x] = ROBOT;
+}
+
+// 보드 출력
+void print_board() {
+    system("cls");  
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            switch (board[i][j]) {
+            case ROBOT:
+                set_color(BLACK);  // 로봇(유저)
+                break;
+            case TRASH:
+                set_color(YELLOW);  // 쓰레기
+                break;
+            case OBSTACLE:
+                set_color(RED);  // 장애물
+                break;
+            default:
+                set_color(RESET);  // 빈 공간은 기본 색상
+                break;
+            }
+            printf("%c", board[i][j]);
+        }
+        printf("\n");
+    }
+    set_color(RESET);  // 색상 초기화
+    printf("Score: %d\n", score);
+}
+
+// 로봇 이동
+void move_robot(int dx, int dy) {
+    int new_x = robot_x + dx;
+    int new_y = robot_y + dy;
+
+    // 보드 경계 체크
+    if (new_x < 0 || new_x >= WIDTH || new_y < 0 || new_y >= HEIGHT) return;
+
+    // 충돌 처리
+    if (board[new_y][new_x] == OBSTACLE){
+        printf("!!!!!!!! .\n");
+        exit(1);
+    }
+    else if (board[new_y][new_x] == TRASH) {
+        score += 5; 
+    }
+
+    // 이동 처리
+    board[robot_y][robot_x] = EMPTY;  // 이전 위치를 빈 공간으로
+    robot_x = new_x;
+    robot_y = new_y;
+    board[robot_y][robot_x] = ROBOT;  // 새로운 위치에 로봇 배치
+}
+
+// 게임 루프
+void game_loop() {
+    char input;
+    while (0) {
+        print_board();
+        if (_kbhit()) {  
+            input = _getch(); 
+            switch (input) {
+            case 'z': move_robot(0, -1); break;  // 위로 이동
+            case 'x': move_robot(0, 1); break;   // 아래로 이동
+            case 'c': move_robot(-1, 0); break;  // 왼쪽으로 이동
+            case 'v': move_robot(1, 0); break;   // 오른쪽으로 이동
+            case 'q': return;  // 게임 종료
+            }
+        }
+        // 쓰레기 랜덤 생성 (게임 진행 중)
+        if (rand() % 10 < 2) {
+            int rand_x = rand() % WIDTH;
+            int rand_y = rand() % HEIGHT;
+            if (board[rand_y][rand_x] == EMPTY) {
+                board[rand_y][rand_x] = TRASH;
+            }
+        }
+        _sleep(5);  // 게임 속도 조절
+    }
+}
+
+// 메인 함수
+int main() {
+    init_game();    // 게임 초기화
+    game_loop();    // 게임 루프 실행
+
+}
