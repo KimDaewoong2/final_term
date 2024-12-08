@@ -145,5 +145,7 @@ void game_loop() {
 int main() {
     init_game();    // 게임 초기화
     game_loop();    // 게임 루프 실행
+    printf("Final Score: %d\n", score);
+    return 0;
 
 }
