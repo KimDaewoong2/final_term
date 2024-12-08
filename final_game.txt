@@ -101,7 +101,7 @@ void move_robot(int dx, int dy) {
     // 충돌 처리
     if (board[new_y][new_x] == OBSTACLE){
         printf("!!!!!!!! .\n");
-        exit(1);
+        exit(0);
     }
     else if (board[new_y][new_x] == TRASH) {
         score += 5; 
