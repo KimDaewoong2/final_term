@@ -140,7 +140,7 @@ void game_loop() {
                 board[rand_y][rand_x] = TRASH;
             }
         }
-        _sleep(5);  // 게임 속도 조절
+        Sleep(200);  // 게임 속도 조절
     }
 }
 
